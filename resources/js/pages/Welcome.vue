@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { Head } from '@inertiajs/vue3';
 
-import { useConfig } from "./../composables/useConfig";
-
 const { config } = useConfig()
 </script>
 
