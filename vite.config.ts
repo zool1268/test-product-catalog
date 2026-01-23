@@ -7,6 +7,7 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { quasar, transformAssetUrls } from '@quasar/vite-plugin'
 import { fileURLToPath } from 'node:url'
+import path from 'node:path';
 
 export default defineConfig({
     plugins: [
@@ -40,6 +41,7 @@ export default defineConfig({
             dirs: [
                 './resources/js/composables/**',
                 './resources/js/utils/**',
+                './resources/js/stores/**'
             ],
 
             dts: './resources/js/.auto-imports.d.ts',
@@ -67,7 +69,8 @@ export default defineConfig({
 
     resolve: {
         alias: {
-            '@': '/resources/js',
+            '@': path.resolve(__dirname, '/resources/js'),
+            '~': path.resolve(__dirname, 'resources'),
         },
     },
 });

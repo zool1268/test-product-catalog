@@ -33,4 +33,5 @@ yarn-error.log
 .github/
 .prettierignore
 .prettierrc
+.eslintrc-auto-import.json
 

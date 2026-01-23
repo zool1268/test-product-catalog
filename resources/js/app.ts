@@ -2,7 +2,8 @@ import '../css/app.css';
 
 import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
-import { Quasar } from 'quasar';
+import { createPinia } from 'pinia';
+import { Dialog, Notify, Quasar } from 'quasar';
 import type { DefineComponent } from 'vue';
 import { createApp, h } from 'vue';
 
@@ -12,6 +13,8 @@ import 'quasar/src/css/index.sass'
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
 import AppLayout from './layouts/AppLayout.vue';
+
+const pinia = createPinia()
 
 createInertiaApp({
     title: (title) => (title ? `${title} - ${appName}` : appName),
@@ -24,7 +27,13 @@ createInertiaApp({
     setup({ el, App, props, plugin }) {
         createApp({ render: () => h(App, props) })
             .use(plugin)
-            .use(Quasar)
+            .use(Quasar, {
+                plugins: {
+                    Dialog,
+                    Notify,
+                }
+            })
+            .use(pinia)
             .mount(el);
     },
     progress: {
