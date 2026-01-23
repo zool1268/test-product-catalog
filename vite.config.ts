@@ -1,10 +1,12 @@
 import { wayfinder } from '@laravel/vite-plugin-wayfinder';
-import tailwindcss from '@tailwindcss/vite';
+// import tailwindcss from '@tailwindcss/vite';
 import vue from '@vitejs/plugin-vue';
 import laravel from 'laravel-vite-plugin';
 import { defineConfig } from 'vite';
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
+import { quasar, transformAssetUrls } from '@quasar/vite-plugin'
+import { fileURLToPath } from 'node:url'
 
 export default defineConfig({
     plugins: [
@@ -13,13 +15,15 @@ export default defineConfig({
             ssr: 'resources/js/ssr.ts',
             refresh: true,
         }),
-        tailwindcss(),
         vue({
             template: {
-                transformAssetUrls: {
-                    base: null,
-                    includeAbsolute: false,
-                },
+                transformAssetUrls,
+                preprocessOptions: {
+                    pug: {
+                        doctype: 'html',
+                        basedir: './resources'
+                    }
+                }
             },
         }),
         wayfinder({
@@ -52,6 +56,12 @@ export default defineConfig({
             dirs: ['resources/js/components'],
             extensions: ['vue'],
             dts: './resources/js/.components.d.ts',
+        }),
+        quasar({
+            sassVariables: fileURLToPath(
+                new URL('./resources/js/quasar-variables.sass', import.meta.url)
+            ),
+            autoImportComponentCase: 'combined',
         }),
     ],
 
