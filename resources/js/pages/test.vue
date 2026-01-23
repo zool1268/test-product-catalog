@@ -7,7 +7,7 @@
 </script>
 
 <template lang="pug">
-    q-card.q-ma-lg.q-pa-md
+    q-card.q-pa-sm
         div {{ var1 }}
         div test test
         q-btn(color="primary") OK

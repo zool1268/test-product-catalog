@@ -11,15 +11,20 @@ import 'quasar/src/css/index.sass'
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
+import AppLayout from './layouts/AppLayout.vue';
+
 createInertiaApp({
     title: (title) => (title ? `${title} - ${appName}` : appName),
-    resolve: (name) => resolvePageComponent(`./pages/${name}.vue`, import.meta.glob<DefineComponent>('./pages/**/*.vue')),
+    resolve: async (name) => {
+        const page = await resolvePageComponent(`./pages/${name}.vue`, import.meta.glob<DefineComponent>('./pages/**/*.vue'))
+
+        page.default.layout = page.default.layout || AppLayout
+        return page
+    },
     setup({ el, App, props, plugin }) {
         createApp({ render: () => h(App, props) })
             .use(plugin)
-            .use(Quasar, {
-                plugins: {},
-            })
+            .use(Quasar)
             .mount(el);
     },
     progress: {
