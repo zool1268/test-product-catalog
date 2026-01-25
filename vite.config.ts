@@ -10,6 +10,9 @@ import { fileURLToPath } from 'node:url'
 import path from 'node:path';
 
 export default defineConfig({
+    optimizeDeps: {
+        include: ['quasar']
+    },
     plugins: [
         laravel({
             input: ['resources/js/app.ts'],

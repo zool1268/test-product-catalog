@@ -7,6 +7,8 @@ import { renderToString } from 'vue/server-renderer';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
+import AppLayout from './layouts/AppLayout.vue';
+
 createServer(
     (page) =>
         createInertiaApp({
@@ -19,8 +21,9 @@ createServer(
     { cluster: true },
 );
 
-function resolvePage(name: string) {
+async function resolvePage(name: string) {
     const pages = import.meta.glob<DefineComponent>('./pages/**/*.vue');
-
-    return resolvePageComponent<DefineComponent>(`./pages/${name}.vue`, pages);
+    const page = await resolvePageComponent<DefineComponent>(`./pages/${name}.vue`, pages)
+    page.default.layout = page.default.layout || AppLayout
+    return page;
 }
