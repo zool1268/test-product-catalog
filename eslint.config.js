@@ -2,16 +2,20 @@ import { defineConfigWithVueTs, vueTsConfigs } from '@vue/eslint-config-typescri
 import prettier from 'eslint-config-prettier';
 import importPlugin from 'eslint-plugin-import';
 import vue from 'eslint-plugin-vue';
+import vuePug from 'eslint-plugin-vue-pug';
+import pugConfig from '@vue/eslint-config-pug';
 
 export default defineConfigWithVueTs(
     vue.configs['flat/essential'],
     vueTsConfigs.recommended,
+    pugConfig,
     {
-        ignores: ['vendor', 'node_modules', 'public', 'bootstrap/ssr', 'tailwind.config.js', 'vite.config.ts', 'resources/js/components/ui/*'],
+        ignores: ['vendor', 'node_modules', 'public', 'bootstrap/ssr', 'vite.config.ts', 'resources/js/components/ui/*'],
     },
     {
         plugins: {
             import: importPlugin,
+            'vue-pug': vuePug,
         },
         settings: {
             'import/resolver': {
