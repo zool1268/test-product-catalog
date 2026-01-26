@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Database\Seeders\ProductSeeder;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -16,10 +16,18 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'user@tpc.ru',
-            'password' => Hash::make('user')
+        if (!User::where('email', 'user@tpc.ru')->exists()) {
+            User::factory()->create([
+                'name' => 'Test User',
+                'email' => 'user@tpc.ru',
+                'password' => Hash::make('user')
+            ]);
+        } else {
+            $this->command->info('Тестовый пользователь уже существует');
+        }
+
+        $this->call([
+            ProductSeeder::class
         ]);
     }
 }
