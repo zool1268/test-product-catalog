@@ -1,8 +1,9 @@
 <script lang="ts" setup>
 import type { AxiosError } from "axios"
-import { type ApiError, useAuthStore } from '@/stores/useAuthStore';
+import { type ApiError} from '@/utils/api';
 import { ref } from 'vue';
 import { useQuasar } from "quasar";
+import { useAuthStore } from "@/stores/useAuthStore";
 
 const emit = defineEmits(["loggedin"])
 const auth = useAuthStore()
