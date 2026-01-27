@@ -31,11 +31,12 @@ export const useAuthStore = defineStore('auth', () => {
   const $q = useQuasar()
 
   const user = ref<User | null>(null)
-  const token = ref<string | null>(localStorage.getItem('token'))
+  const token = ref<string | null>(localStorage.getItem('access_token'))
   const loading = ref<boolean>(false)
 
   const isAuthenticated = computed<boolean>(() => !!token.value && !!user.value)
 
+  checkAuth()
   async function login(credentials: LoginCredentials): Promise<AuthResponse> {
     loading.value = true
 
@@ -105,7 +106,7 @@ export const useAuthStore = defineStore('auth', () => {
       user.value = response.data
       return true
     } catch {
-      // Токен недействителен
+      // Токен устарел
       token.value = null
       user.value = null
       localStorage.removeItem('access_token')
