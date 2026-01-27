@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Resources\ProductCollection;
+use App\Http\Resources\ProductResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class ProductController extends Controller
@@ -19,8 +19,11 @@ class ProductController extends Controller
         if ($request->get('category_id')) {
             $query->where('category_id', $request->get('category_id'));
         }
+        if ($request->get('search') && strlen($request->get('search')) > 2) {
+            $query->whereAny(['name', 'description'], 'ilike', "%{$request->get('search')}%");
+        }
         $products = $query->paginate(10);
-        sleep(2); // @todo remove this @debug
+        sleep(1); // @todo remove this @debug
         return new ProductCollection($products);
     }
 
@@ -37,7 +40,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        return new ProductResource($product->load('category'));
     }
 
     /**

@@ -20,7 +20,7 @@ class ProductFactory extends Factory
         $locale = 'ru_RU';
         return [
             'name' => fake($locale)->words(3, true),
-            'description' => fake($locale)->realText(),
+            'description' => fake($locale)->realText(2000, 5),
             'price' => fake()->randomFloat(2, 100, 10000),
             'category_id' => Category::factory(),
         ];
