@@ -32,7 +32,7 @@ const handleLogout = async () => {
                             q-card-section.q-pa-sm
                                 login-form(@loggedin="showLoginForm = false")
             q-toolbar.text-center(v-if="isAuthenticated")
-                Link(href="admin/products") Управление товарами
+                Link(href="/admin/products") Управление товарами
         q-page-container
             q-page.q-pa-md
                 slot
