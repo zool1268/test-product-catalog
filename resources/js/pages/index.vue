@@ -1,8 +1,10 @@
 <script setup lang="ts">
-// import { Head } from '@inertiajs/vue3';
-
+//
 </script>
 
 <template lang="pug">
-    div index
+    q-card
+        q-card-section
+            h2 Продукция
+            products-list
 </template>

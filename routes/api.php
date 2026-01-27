@@ -19,5 +19,5 @@ Route::resource('/products', ProductController::class)->only(['index', 'show']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', [AuthController::class, 'getUser']);
     Route::post('/logout', [AuthController::class, 'logout']);
-    Route::resource('/products', ProductController::class)->except(['index', 'show']);
+    Route::resource('/products', ProductController::class)->except(['index', 'show', 'create', 'edit']);
 });

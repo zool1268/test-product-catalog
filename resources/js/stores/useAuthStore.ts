@@ -7,8 +7,7 @@ import { computed, ref } from "vue"
 import type { User } from "@/types"
 
 import api from "../utils/api"
-
-
+import { ApiError } from "../utils/api"
 
 export interface LoginCredentials {
   email: string
@@ -26,12 +25,6 @@ export interface AuthResponse {
   access_token: string
   token_type: string
   user: User
-}
-
-export interface ApiError {
-  message: string
-  errors?: Record<string, string[]>
-  status?: number
 }
 
 export const useAuthStore = defineStore('auth', () => {

@@ -7,3 +7,17 @@ export type AppPageProps<T extends Record<string, unknown> = Record<string, unkn
     auth: Auth;
     [key: string]: unknown;
 };
+
+export interface Product {
+    id: number,
+    name: string,
+    description: string,
+    short_description: string,
+    price: number,
+    formatted_price: string,
+    category_id: number,
+    category: {
+        id: number,
+        name: string,
+    }
+}

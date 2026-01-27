@@ -1,5 +1,10 @@
 
 import axios from "axios"
+export interface ApiError {
+  message: string
+  errors?: Record<string, string[]>
+  status?: number
+}
 
 const api = axios.create({
     baseURL: '/api',

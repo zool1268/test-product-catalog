@@ -42,6 +42,6 @@ class Product extends Model
 
     public function getShortDescriptionAttribute(): string
     {
-        return str($this->description)->limit(150);
+        return str($this->description)->limit(100);
     }
 }

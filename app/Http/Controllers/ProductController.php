@@ -16,10 +16,11 @@ class ProductController extends Controller
     public function index(Request $request): ResourceCollection
     {
         $query = Product::with('category');
-        if ($request->has('category_id')) {
+        if ($request->get('category_id')) {
             $query->where('category_id', $request->get('category_id'));
         }
         $products = $query->paginate(10);
+        sleep(2); // @todo remove this @debug
         return new ProductCollection($products);
     }
 
