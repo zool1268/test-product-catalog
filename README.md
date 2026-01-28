@@ -47,3 +47,19 @@
 * После успешного сохранения — редирект на список товаров администратора.
 
 
+# Разработано
+
+* laravel 12.x
+* node v22.16.0
+* postgesql 24.04.1 - думаю неважно
+
+## Запуск
+
+* создать БД psql
+* cp .env.example .env (исправить)
+    подредактировать
+* composer install
+* ./artisan migrate
+* ./artisan db:seed
+* composer run dev
+
