@@ -24,6 +24,9 @@ defineExpose({
 </script>
 
 <template lang="pug">
+    .row.q-mt-xs
+        .col
+            slot(name="before-filter")
     .row
         .col
             .flex.q-gutter-md
@@ -42,7 +45,7 @@ defineExpose({
                     label="Поиск"
                     clearable
                 )
-    .row.q-mt-sm
+    .row.q-mt-xs
         .col
             .row
                 q-list.full-width

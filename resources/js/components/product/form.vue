@@ -28,7 +28,7 @@ const isNew = !props.product
 const productProperties = ref({
     name: props.product?.name || '',
     description: props.product?.description || '',
-    categoryId: props.product?.category_id || null,
+    category_id: props.product?.category_id || null,
     price: props.product?.price || 0.0,
 })
 
@@ -68,7 +68,7 @@ async function onSubmit() {
                     :error-message="errors.name"
                 )
                 q-select(
-                    v-model="productProperties.categoryId"
+                    v-model="productProperties.category_id"
                     :options="categories"
                     style="width: 300px;"
                     label="Категория *"

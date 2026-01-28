@@ -36,7 +36,7 @@ class ProductController extends Controller
             'name' => 'required|string|min:3|max:255',
             'description' => 'sometimes|string',
             'price' => 'required|numeric|gt:0',
-            'category_id' => 'required|exists:categories,id',
+            'category_id' => 'required|exists:category,id',
         ]);
 
         $product = Product::create($validated);
@@ -60,7 +60,7 @@ class ProductController extends Controller
             'name' => 'sometimes|string|min:3|max:255',
             'description' => 'sometimes|string',
             'price' => 'sometimes|numeric|min:0',
-            'category_id' => 'sometimes|exists:categories,id',
+            'category_id' => 'required|exists:category,id',
         ]);
 
         $product->update($validated);

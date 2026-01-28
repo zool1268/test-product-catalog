@@ -17,7 +17,7 @@ const product = computed(() => data.value?.data)
         q-card-section Категория: {{ product?.category.name }}
         q-card-section
             h3 {{ product?.name }}
-        q-card-section {{ product?.description }}
+        q-card-section(v-html="product?.description")
         q-card-section Цена: {{ product?.formatted_price }}
         q-card-actions
             q-btn(color="primary" @click.prevent="router.visit('/')") << к списку товаров

@@ -25,6 +25,11 @@ function handleEditProduct(product: Product) {
     editDialog.value = true
 }
 
+function handleAddProduct() {
+    selectedProduct.value = null
+    editDialog.value = true
+}
+
 const handleProductDeleted = async () => {
   if (!selectedProduct.value) return
 
@@ -72,12 +77,14 @@ function handleDeleteProduct(product: Product) {
                             .row
                                 .col {{ product.name }}
                             .row.full-width.q-mt-sm.text-center
-                                .col {{ product.short_description }}
+                                .col(v-html="product.short_description")
                                 .col {{ product.formatted_price }}
                                 .col-1
-                                    q-btn(color="primary" @click="handleEditProduct(product)") редактировать
+                                    q-btn(color="primary" @click="handleEditProduct(product)") Редактировать
                                 .col-1
-                                    q-btn(color="primary" @click="handleDeleteProduct(product)") удалить
+                                    q-btn(color="primary" @click="handleDeleteProduct(product)") Удалить
+                template(#before-filter)
+                    q-btn(color="primary" @click="handleAddProduct()") Создать
     q-dialog(v-model="editDialog" persistent)
         q-card
             q-card-section.flex.items-center.justify-between

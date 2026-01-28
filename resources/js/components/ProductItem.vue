@@ -17,7 +17,7 @@ function goToProduct() {
             .row.border-bottom категория: {{ product.category.name }}
             .row
                 .col {{ product.name }}
-                .col {{ product.short_description }}
+                .col(v-html="product.short_description")
                 .col.text-center {{ product.formatted_price }}
     <q-separator spaced />
 </template>
