@@ -23,7 +23,6 @@ class ProductController extends Controller
             $query->whereAny(['name', 'description'], 'ilike', "%{$request->get('search')}%");
         }
         $products = $query->paginate(10);
-        sleep(1); // @todo remove this @debug
         return new ProductCollection($products);
     }
 
