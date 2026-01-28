@@ -1,20 +1,26 @@
 <script setup lang="ts">
 import useApiQuery from '@/composables/useApiQuery';
-import products from '@/routes/products';
 import { computed, ref } from 'vue';
 
 const category = ref()
-const search = ref("")
+const localSearch = ref("")
 const page = ref(1)
-const { data: productsData, loading } = useApiQuery("products", {
+const { data: productsData, loading, execute } = useApiQuery("products", {
     arguments: {
         page: computed(() => page.value),
         category_id: computed(() => category.value),
-        search: computed(() => search.value)
+        search: computed(() => localSearch.value)
     }
 })
 const { data: categoriesData } = useApiQuery("categories")
 const categories = computed(() => categoriesData.value?.data.map((c: {id: number, name: string}) => ({label: c.name, value: c.id})) || [])
+
+async function updateData() {
+    await execute()
+}
+defineExpose({
+    updateData,
+})
 </script>
 
 <template lang="pug">
@@ -32,7 +38,7 @@ const categories = computed(() => categoriesData.value?.data.map((c: {id: number
                     template(v-slot:append)
                         q-icon(name="close" @click.stop.prevent="category = ''" class="cursor-pointer")
                 q-input(
-                    v-model="search"
+                    v-model="localSearch"
                     label="Поиск"
                     clearable
                 )

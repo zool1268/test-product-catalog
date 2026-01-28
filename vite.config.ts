@@ -61,6 +61,9 @@ export default defineConfig({
             dirs: ['resources/js/components'],
             extensions: ['vue'],
             dts: './resources/js/.components.d.ts',
+            directoryAsNamespace: true,
+            collapseSamePrefixes: true,
+            deep: true,
         }),
         quasar({
             sassVariables: fileURLToPath(

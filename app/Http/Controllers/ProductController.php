@@ -32,7 +32,15 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|min:3|max:255',
+            'description' => 'sometimes|string',
+            'price' => 'required|numeric|gt:0',
+            'category_id' => 'required|exists:categories,id',
+        ]);
+
+        $product = Product::create($validated);
+        return response(new ProductResource($product->load('category')), 201);
     }
 
     /**
@@ -48,7 +56,16 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'sometimes|string|min:3|max:255',
+            'description' => 'sometimes|string',
+            'price' => 'sometimes|numeric|min:0',
+            'category_id' => 'sometimes|exists:categories,id',
+        ]);
+
+        $product->update($validated);
+
+        return new ProductResource($product->load('category'));
     }
 
     /**
@@ -56,6 +73,8 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+
+        return response()->json(['message' => 'Товар успешно удален']);
     }
 }
