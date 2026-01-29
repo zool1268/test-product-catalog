@@ -53,7 +53,16 @@
 * node v22.16.0
 * postgesql 24.04.1 - думаю неважно
 
-## Запуск
+## Запуск докер
+
+cp .env.example .env
+WWWGROUP=1000 WWWUSER=1000 ./vendor/bin/sail build --no-cache
+./vendor/bin/sail up -d
+./vendor/bin/sail npm run build
+./vendor/bin/sail artisan migrate
+./vendor/bin/sail artisan db:seed
+
+## Запуск дев
 
 * создать БД psql
 * cp .env.example .env (исправить)
