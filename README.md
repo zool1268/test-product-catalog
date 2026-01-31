@@ -55,12 +55,12 @@
 
 ## Запуск докер
 
-cp .env.example .env
-./vendor/bin/sail build
-./vendor/bin/sail up -d
-./vendor/bin/sail npm run build
-./vendor/bin/sail artisan migrate
-./vendor/bin/sail artisan db:seed
+* cp .env.example .env
+* ./vendor/bin/sail build
+* ./vendor/bin/sail up -d
+* ./vendor/bin/sail npm run build
+* ./vendor/bin/sail artisan migrate
+* ./vendor/bin/sail artisan db:seed
 
 ## Запуск дев
 
