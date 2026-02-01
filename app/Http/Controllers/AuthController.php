@@ -44,7 +44,7 @@ class AuthController extends Controller
 
         if (!Auth::attempt($credentials)) {
             throw ValidationException::withMessages([
-                'email' => ['Неверные учетные данные'],
+                'email' => ['Неверные учетные данные.'],
             ]);
         }
 
